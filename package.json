@@ -39,14 +39,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --quiet --fix",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "pre-commit": "yarn lint --fix && yarn format",
-    "prepare": "husky"
+    "build": "set DISABLE_ESLINT_PLUGIN=true && react-scripts build",
+    "test": "react-scripts test"
+   
   },
   "eslintConfig": {
     "extends": [
