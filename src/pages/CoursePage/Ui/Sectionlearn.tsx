@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import tick from '../../../assets/icons/tick-circle.svg'
-import learn from '../../../assets/images/learn.svg'
+import learn from '/images/learn.svg'
 
 interface Advantage {
   title: string
@@ -26,7 +26,7 @@ const Learn: React.FC = (): JSX.Element => {
           <div className="flex flex-col gap-5 w-[700px] max-xl:w-[550px]  max-lg:w-[664px] max-sm:w-[320px]">
             <Paragraph expanded={expanded} toggleExpand={toggleExpand} />
             <div>
-              <img className="rounded-xl" src={learn} alt="Tick Icon" />
+              <img className="rounded-xl" src={'/images/learn.svg'} alt="Tick Icon" />
             </div>
           </div>
         </div>

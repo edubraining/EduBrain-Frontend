@@ -1,4 +1,4 @@
-import heroImage from '../../assets/images/Hero Image.svg'
+// import heroImage from '/images/Hero Image.svg'
 import heroImageOverlay from '../../assets/images/Ellipse 1.svg'
 import type { JSX } from 'react'
 import PrimaryButton from '../../components/buttons/PrimaryButton'
@@ -49,7 +49,7 @@ const HeroSection = (): JSX.Element => {
         </div>
         <div className="w-fit relative overflow-hidden xl:mt-[116px] flex items-center justify-center">
           <img
-            src={heroImage}
+            src={'/images/Hero Image.svg'}
             className="w-full z-10 object-contain object-center max-w-[500px] xl:max-w-[679px] aspect-[1.1/1]"
             alt=""
           />

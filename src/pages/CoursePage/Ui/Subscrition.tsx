@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import tick from '../../../assets/icons/tick-circle.svg'
-import refer from '../../../assets/images/refer.svg'
-import refersm from '../../../assets/images/refersm.svg'
+// import refer from '/images/refer.svg'
+// import refersm from '/images/refersm.svg'
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { type ICourse } from '../../../types/course.types'
@@ -110,10 +110,10 @@ const Payment: React.FC<PaymentProps> = ({ package1, package2 }) => {
         </div>
       </div>
       <div className="py-16 pb-[100px] max-lg:px-6 flex justify-center max-sm:hidden">
-        <img src={refer} alt="" />
+        <img src={'/images/refer.svg'} alt="" />
       </div>
       <div className="py-2 flex justify-center sm:hidden">
-        <img src={refersm} alt="" />
+        <img src={'/images/refersm.svg'} alt="" />
       </div>
     </div>
   )
