@@ -18,6 +18,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: './tsconfig.json', // Ensure this points to your TypeScript config file
   },
   plugins: ['react'],
   rules: {
@@ -33,11 +34,12 @@ module.exports = {
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
     '@typescript-eslint/prefer-ts-expect-error': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
-    ' @typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/restrict-plus-operands': 'off', // Disable the rule entirely
   },
   settings: {
     react: {
       version: 'detect',
     },
   },
-}
+};
