@@ -23,6 +23,7 @@ const HomePage = (): JSX.Element => {
           handleModal={handleModal}
           setIsModalOpen={setIsModalOpen}
         />
+      
       </main>
       <FloatingCart />
     </div>

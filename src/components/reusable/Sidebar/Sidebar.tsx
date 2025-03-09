@@ -13,11 +13,18 @@ import toast from 'react-hot-toast'
 import { useQueryClient } from '@tanstack/react-query'
 import { setIsAuthenticated, setUser } from '../../../store/slices/userSlices'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../store/index' // Import the RootState type
+
+
+
 
 const Sidebar = (): JSX.Element => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const dispatch = useDispatch()
+  const user = useSelector((state: RootState) => state?.userSlice?.user)
+  
 
   const logout = (): void => {
     handleLogout()
@@ -61,7 +68,29 @@ const Sidebar = (): JSX.Element => {
       </Link>
 
       {/* Navlinks */}
+
       <div className="flex flex-col gap-4">
+
+
+
+      {
+        user?.role==="admin" &&(
+          <NavLink
+          to={'/solve-doubt'}
+          className={({ isActive, isPending }) =>
+            isPending
+              ? 'pending'
+              : isActive
+                ? 'text-primary-55 h-[45px] rounded-xl dark:bg-primary-95 bg-primary-35/15 p-3 flex items-center gap-3 text-[16px] font-roboto font-normal'
+                : ' dark:text-neutral-40 text-neutral-60 h-[45px] p-3 flex items-center gap-3 text-[16px] font-roboto font-normal'
+          }
+        >
+          <IoCheckmarkDoneCircle />Solve Doubts
+        </NavLink>
+        )
+      }
+
+
         <NavLink
           to={'/dashboard/myCourse'}
           className={({ isActive, isPending }) =>
@@ -114,6 +143,7 @@ const Sidebar = (): JSX.Element => {
         >
           <IoCheckmarkDoneCircle /> Refer & Earn
         </NavLink>
+     
 
         <NavLink
           to={'/dashboard/certification'}

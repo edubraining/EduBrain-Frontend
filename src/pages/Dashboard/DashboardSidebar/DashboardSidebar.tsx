@@ -8,9 +8,13 @@ import { IoCheckmarkDoneCircle } from 'react-icons/io5'
 import { GrCertificate } from 'react-icons/gr'
 import { TbLogout2 } from 'react-icons/tb'
 import Togglebtn from '../../../components/reusable/Sidebar/Togglebtn'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../store/index' // Import the RootState type
 
 const DashboardSidebar = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const user = useSelector((state: RootState) => state?.userSlice?.user)
+
 
   const toggleSidebar = (): void => {
     setIsOpen(!isOpen)
@@ -50,6 +54,25 @@ const DashboardSidebar = (): JSX.Element => {
 
             {/* Navlinks */}
             <div className="flex flex-col justify-center gap-4">
+
+               {
+                      user?.role==="admin" &&(
+                        <NavLink
+                        to={'/solve-doubt'}
+                        className={({ isActive, isPending }) =>
+                          isPending
+                            ? 'pending'
+                            : isActive
+                              ? 'text-primary-55 h-[45px] rounded-xl dark:bg-primary-95 bg-primary-35/15 p-3 flex items-center gap-3 text-[16px] font-roboto font-normal'
+                              : ' dark:text-neutral-40 text-neutral-60 h-[45px] p-3 flex items-center gap-3 text-[16px] font-roboto font-normal'
+                        }
+                      >
+                        <IoCheckmarkDoneCircle />Solve Doubts
+                      </NavLink>
+                      )
+                    }
+
+
               <NavLink
                 to={'/dashboard/myCourse'}
                 className={({ isActive, isPending }) =>
@@ -101,6 +124,8 @@ const DashboardSidebar = (): JSX.Element => {
               >
                 <IoCheckmarkDoneCircle /> Refer & Earn
               </NavLink>
+
+          
 
               <NavLink
                 to={'/dashboard/certification'}

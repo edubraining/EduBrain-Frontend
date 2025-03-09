@@ -5,9 +5,32 @@ import { type ICourse } from '../../types/course.types'
 import { useSelector } from 'react-redux'
 import { type RootState } from '../../store'
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { handleGetUser } from '../../api/user'
 
 const PriceDetailsCard = ({ items }: { items: ICourse[] }): JSX.Element => {
   const { cartItems } = useSelector((state: RootState) => state.cartItems)
+    const [email, setEmail] = useState<string>("");
+  
+    useEffect(() => {
+      handleGetUser()
+        .then((res) => {
+          setEmail((res as { email: string }).email); // Type assertion
+         
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    })
+  
+   
+    
+
+  const handleEnroll = (): void => {
+    email
+      ? (window.location.href = `https://pages.razorpay.com/pl_PCndOh475OhoA1/view?product=&email=${email}`)
+      : (window.location.href = `https://pages.razorpay.com/pl_PCndOh475OhoA1/view?product=`)
+  }
 
   const navigate = useNavigate();
   return (
@@ -25,7 +48,13 @@ const PriceDetailsCard = ({ items }: { items: ICourse[] }): JSX.Element => {
           <span>Total</span>
         </div>
       <PrimaryButton  onClick={() => { navigate('/'); }}   className="flex gap-4 items-center justify-center font-semibold text-neutral-100">
-        <span>Checkout</span>
+        <span 
+        
+        onClick={() => {
+            handleEnroll()
+          }}  
+          
+          >Checkout</span>
         <img src={arrowLeftAlt} alt="arrow-left" />
       </PrimaryButton>
     </div>

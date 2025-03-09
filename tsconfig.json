@@ -16,7 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "global.d.ts"],
+  "include": ["src", "global.d.ts", "src/components/doubts/.jsx"],
   "baseUrl": "./src",
   "paths": {
     "@/*": ["*"],

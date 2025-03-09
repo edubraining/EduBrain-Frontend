@@ -7,17 +7,43 @@
   @apply font-Roboto tracking-[0px] scroll-smooth;
 }
 
-*::-webkit-scrollbar {
-  display: none;
+
+
+::-webkit-scrollbar {
+  overflow-x: hidden;  /* Hide horizontal scrolling */
+  overflow-y: auto;    /* Keep vertical scrolling */
+}
+/* Style only the vertical scrollbar */
+::-webkit-scrollbar {
+  width: 16px; /* Thickness of vertical scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track background */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #514f4f; /* Thumb color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #231919; /* Hover state */
+}
+
+/* Optional: Reset any horizontal scrollbar styling */
+::-webkit-scrollbar {
+  background: initial;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 /* IE and Edge */
 /* Firefox */
-* {
+/* * {
   -ms-overflow-style: none; 
   scrollbar-width: none; 
-}
+} */
 
 h1,
 h2,

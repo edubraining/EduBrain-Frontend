@@ -5,13 +5,13 @@ import { FiLogOut } from 'react-icons/fi'
 import DashboardSidebar from '../DashboardSidebar/DashboardSidebar'
 import Notifications from './Notifications/Notifications'
 import arrowUp from '../../..//assets/icons/arrow-up.svg'
-import { handleLogout } from '../../../api/user'
+import { handleGetUser, handleLogout } from '../../../api/user'
 import { useDispatch } from 'react-redux'
 import { setIsAuthenticated, setUser } from '../../../store/slices/userSlices'
-import { useQueryClient } from '@tanstack/react-query'
+import {  useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-
+import Doubt from '../DashboardHeader/Notifications/Doubt'
 
 
 interface Props {
@@ -29,7 +29,23 @@ const DashboardHeader = (props: Props): JSX.Element => {
 
   const [isOpen, setIsOpen] = useState(false)
   const [isNotificationOpen, setNotificationOpen] = useState(false)
+  const [name, setName] = useState<string>("");
+  
 
+
+
+  useEffect(() => {
+    handleGetUser()
+      .then((res) => {
+        setName((res as { name: string }).name); // Type assertion
+       
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  })
+
+ 
   
 
   const toggleDropdown = (): void => {
@@ -121,9 +137,11 @@ const DashboardHeader = (props: Props): JSX.Element => {
           </div>
         ) : (
           <h1 className="text-[32px] dark:text-neutral-10 text-neutral-75 font-semibold font-roboto hidden md:flex">
-            Hello, Rahul
+            Hello, {name}
           </h1>
         )}
+
+        <Doubt/>
         {!(props.from === 'videoSection') && (
           <div className="flex md:hidden">
             <DashboardSidebar />

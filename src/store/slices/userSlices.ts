@@ -7,6 +7,7 @@ interface IUser {
     name: string
     email: string
     isAuthorized: string
+    role: string; // Add the `role` property
   } | null
 }
 

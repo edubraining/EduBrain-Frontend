@@ -28,6 +28,7 @@ export interface ICourse {
   basePrice: number
   total_duration: string
   category?: string
+  name?:string
   syllabus?: Array<{
     title: string
     description: string

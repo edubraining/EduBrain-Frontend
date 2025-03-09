@@ -121,7 +121,7 @@ const BenefitsCard: React.FC<CardProps> = ({ title1 }) => {
             handleEnroll(title1)
           }}
         >
-          Enroll Now
+          Enroll Now 
         </PrimaryButton>
       </div>
     </>

@@ -21,6 +21,7 @@ import vector7 from '../../assets/icons/Vector 7.svg'
 import vector8 from '../../assets/icons/Vector 8.svg'
 import AuthenticationModal from '../../components/reusable/AuthenticationModal/AuthenticationModal'
 import PropTypes from 'prop-types'
+import CoursesBlock from './CoursesBlock'
 
 // max-w-[1450px] mx-auto padding-x
 
@@ -48,6 +49,7 @@ const Home = ({
       ></AuthenticationModal>
       {/* // Hero Section */}
       <HeroSection />
+     
       {/* //about us */}
       <section
         id="about"
@@ -117,6 +119,8 @@ const Home = ({
             title="Unlock Your Potential by our <br/> Tech Courses"
             desc="Explore tech excellence with Edubraining courses. Transformative learning for a future of possibilities."
           />
+          <CoursesBlock/>
+
           <CourseSection />
         </section>
       </div>

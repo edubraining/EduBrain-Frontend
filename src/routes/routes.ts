@@ -54,6 +54,10 @@ const ROUTES: IRoute[] = [
     path: '/resetpassword/:token',
     component: lazy(async () => await import('../pages/ResetPassword')),
   },
+  {
+    path: '/solve-doubt',
+    component: lazy(async () => await import('../components/doubts/solveDoubts')),
+  },
 ]
 
 export default ROUTES

@@ -80,6 +80,8 @@ const HomePage = (): JSX.Element => {
         )}
         {page && !currentCourse && <div>Course not found</div>}
       </main>
+
+    
     </div>
   )
 }

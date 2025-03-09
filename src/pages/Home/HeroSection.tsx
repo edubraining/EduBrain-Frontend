@@ -30,15 +30,15 @@ const HeroSection = (): JSX.Element => {
             <h1 className="large-heading text-neutral-10">
               Discover the future learning
             </h1>
+           
+
             <span className="sub-heading text-neutral-10 !font-normal">
               AI Enhance courses for high paying job
             </span>
           </div>
-          <p className="body-text-md text-neutral-60 max-w-[492px]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatu
+          <p className="body-text-lg text-neutral-60 max-w-[492px]">
+          Edubraining, founded by Vanshika Goel and Lakhan Chahar, aims to make high-quality technical education accessible and affordable. The platform offers industry-expert-designed recorded courses, live mentorship for personalized guidance, and valid certifications. It also provides internship opportunities and placement assistance to help students build successful tech careers. Edubraining fosters a learning community, empowering individuals to achieve their career goals in the tech industry.
+
           </p>
           <a
             href="#courses"
@@ -61,6 +61,8 @@ const HeroSection = (): JSX.Element => {
           />
         </div>
       </section>
+
+      
     </div>
   )
 }
