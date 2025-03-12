@@ -41,11 +41,12 @@ const HeroSection = (): JSX.Element => {
 
           </p>
           <a
-            href="#courses"
-            className="w-full sm:max-w-[323px] xl:w-[193px] xl:max-w-none"
-          >
-            <PrimaryButton className="w-full">Explore Courses</PrimaryButton>
-          </a>
+  href="#courses"
+  className="w-full sm:max-w-[323px] xl:w-[193px] xl:max-w-none"
+  
+>
+  <PrimaryButton className="w-full">Explore Courses</PrimaryButton>
+</a>  
         </div>
         <div className="w-fit relative overflow-hidden xl:mt-[116px] flex items-center justify-center">
           <img

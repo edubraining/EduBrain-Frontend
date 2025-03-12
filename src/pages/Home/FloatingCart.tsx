@@ -34,8 +34,9 @@ const FloatingCart = (): JSX.Element | null => {
       <Link to="/cart">
         <PrimaryButton className="flex gap-2 items-center">
           <img src={cartIcon} alt="cart icon" className="invert" />
-          <span>Go to Cart</span>
-        </PrimaryButton>
+          {/* <span className="text-lg sm:text-[3px] md:text-[2px] lg:text-3xl xl:text-4xl ">Go to Cart</span> */}
+          <span >Go to Cart</span>
+          </PrimaryButton>
       </Link>
     </div>
   )

@@ -24,7 +24,7 @@ import {
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { type RootState } from '../../../store'
-import { setActiveTab } from '../../../store/slices/modalSlices'
+  import { setActiveTab } from '../../../store/slices/modalSlices'
 import { useLocation } from 'react-router-dom'
 import { setIsAuthenticated, setUser } from '../../../store/slices/userSlices'
 // import { useNavigate } from 'react-router-dom'

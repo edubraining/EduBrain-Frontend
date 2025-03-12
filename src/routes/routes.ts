@@ -1,10 +1,15 @@
 import type { LazyExoticComponent, ComponentType } from 'react'
 import { lazy } from 'react'
+import { useSelector } from 'react-redux'
 import type { RouteProps } from 'react-router-dom'
+import { RootState } from '../store'
 
 type IRoute = RouteProps & {
   component: LazyExoticComponent<ComponentType<any>>
 }
+
+
+ 
 
 const ROUTES: IRoute[] = [
   {
@@ -58,6 +63,7 @@ const ROUTES: IRoute[] = [
     path: '/solve-doubt',
     component: lazy(async () => await import('../components/doubts/solveDoubts')),
   },
+  
 ]
 
 export default ROUTES

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from '@tanstack/react-query'
@@ -18,6 +18,9 @@ import ClockImg from '../../assets/icons/clock.svg'
 import rightArrow from '../../assets/icons/right-arrow.svg'
 import leftArrow from '../../assets/icons/left-arrow.svg'
 import play from '../../assets/icons/play.svg'
+import { setActiveTab, setIsModalOpen } from '../../store/slices/modalSlices'
+
+
 
 const CourseSection = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -32,6 +35,10 @@ const CourseSection = (): JSX.Element => {
     queryFn: getAllCourses,
   })
 
+  const { isAuthenticated, user } = useSelector(
+    (state: RootState) => state.userSlice
+  );
+
   const handleCourseChange = (direction: 'next' | 'prev'): void => {
     if (!data || data.length === 0) return
     if (direction === 'next') {
@@ -40,6 +47,20 @@ const CourseSection = (): JSX.Element => {
       setActiveCourse((prev) => (prev === 0 ? data.length - 1 : prev - 1))
     }
   }
+
+  const navigate = useNavigate();
+  // const { setActiveTab,setIsModalOpen } = useSelector((state: RootState) => state.modalSlice)
+
+
+  const handleExploreClick = (e:any) => {
+    if (!isAuthenticated) {
+        e.preventDefault(); // Prevent default link behavior
+        dispatch(setActiveTab('login')); // Set the modal tab to "login"
+        dispatch(setIsModalOpen(true)); // Open the modal
+    } else {
+        navigate(`/course/${currentCourse.slug}`); // Redirect to the course page
+    }
+};
 
   useEffect(() => {
     if (!data || data.length === 0) return
@@ -144,11 +165,15 @@ const CourseSection = (): JSX.Element => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3 sm:gap-5 xl:max-w-[414px] mt-3 z-40">
-          <Link to={`/course/${currentCourse.slug}`} className="w-full">
+          <div  
+           onClick={handleExploreClick} // Handle click event
+          
+          // to={`/course/${currentCourse.slug}`} 
+          className="w-full">
             <SecondaryButton className="w-full">
               Let&apos;s Explore It
             </SecondaryButton>
-          </Link>
+          </div>
           <PrimaryButton
             onClick={() => {
               dispatch(

@@ -1,6 +1,6 @@
 import aboutUsImage from '../../assets/images/image 45.png'
 import DescriptionCard from './DescriptionCard'
-import hearGlow from '../../assets/images/heart-glow.svg'
+// import hearGlow from '../../assets/images/heart-glow.svg'
 import ABOUT_US from '../../assets/data/aboutUs'
 import CourseSection from './CourseSection'
 import SectionHeader from './SectionHeader'
@@ -91,7 +91,7 @@ const Home = ({
           />
           {/* // glow image at center  */}
           <img
-            src={hearGlow}
+            // src={hearGlow}
             className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2"
             alt=""
           />

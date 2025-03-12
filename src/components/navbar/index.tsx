@@ -1,64 +1,65 @@
-import PropTypes from 'prop-types'
-import { Link, useNavigate } from 'react-router-dom'
-import logo from '../../assets/icons/logo.svg'
-import menu from '../../assets/icons/menu.svg'
-import close from '../../assets/icons/close.svg'
-import NAV_LINKS from './navlinks'
-import { useRef } from 'react'
-import type { JSX } from 'react'
-import SecondaryButton from '../buttons/SecondaryButton'
-import PrimaryButton from '../buttons/PrimaryButton'
-// import shoppingCart from '../../assets/icons/shopping_cart.svg'
-import { useSelector } from 'react-redux'
-import { type RootState } from '../../store'
+import React, { useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import logo from '../../assets/icons/logo.svg';
+import menu from '../../assets/icons/menu.svg';
+import close from '../../assets/icons/close.svg';
+import NAV_LINKS from './navlinks';
+import type { JSX } from 'react';
+import SecondaryButton from '../buttons/SecondaryButton';
+import PrimaryButton from '../buttons/PrimaryButton';
+import { useSelector } from 'react-redux';
+import { type RootState } from '../../store';
 
 const Navbar = ({ onClick }: { onClick?: () => void }): JSX.Element => {
-  const asideBarRef = useRef<HTMLElement>(null)
-  const navigate = useNavigate()
+  const asideBarRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector(
     (state: RootState) => state.userSlice
-  )
+  );
+
+  const closeSidebar = () => {
+    asideBarRef?.current?.classList.remove('translate-x-0');
+    asideBarRef?.current?.classList.add('translate-x-full');
+  };
 
   return (
     <>
-      <header className="absolute inset-0 w-full bg-background py-4 h-fit z-40">
-        <nav className="flex justify-between items-center padding-x m-auto">
+      <header className="absolute inset-0 w-full bg-background py-4 h-fit z-40 ">
+        <nav className="flex justify-between items-center padding-x m-auto ">
           {/* logo */}
           <Link to="/" className="2xl:w-[250px]">
             <img src={logo} className="w-[100px]" alt="Logo" />
           </Link>
           {/* links */}
-          <ul className="gap-8 text-neutral-10 hidden xl:flex">
+          <ul className="gap-8 text-neutral-10 hidden xl:flex pb-24">
             {NAV_LINKS.map((link, index) => (
               <li key={index} className="text-[18px]">
                 <a href={link.url}>{link.label}</a>
               </li>
             ))}
           </ul>
-          {/* cta buttons */}
-          <div className="gap-6 hidden xl:flex items-center">
-            {/* <Link to="/cart">
-              <img src={shoppingCart} alt="Shopping Cart" className="h-6 w-6" />
-            </Link> */}
-            <PrimaryButton
-              onClick={() => {
-                if (isAuthenticated) {
-                  navigate('/dashboard/myCourse')
-                } else {
-                  if (onClick) {
-                    onClick()
-                  }
-                }
-              }}
-              className="w-[193px]"
-            >
-              {isAuthenticated ? user?.name : 'Login / Sign Up'}
-            </PrimaryButton>
-          </div>
+          {/* cta buttons for large screens */}
+          <div className="gap-6 flex xl:flex items-center"> 
+  <PrimaryButton
+    onClick={() => {
+      if (isAuthenticated) {
+        navigate('/dashboard/myCourse');
+      } else {
+        if (onClick) {
+          onClick();
+        }
+      }
+    }}
+    className="w-[193px]"
+  >
+    {isAuthenticated ? user?.name : 'Login / Sign Up'}
+  </PrimaryButton>
+</div>
+
           <button
             onClick={() => {
-              asideBarRef?.current?.classList.add('translate-x-0')
-              asideBarRef?.current?.classList.remove('translate-x-full')
+              asideBarRef?.current?.classList.add('translate-x-0');
+              asideBarRef?.current?.classList.remove('translate-x-full');
             }}
             className="xl:hidden"
           >
@@ -77,41 +78,31 @@ const Navbar = ({ onClick }: { onClick?: () => void }): JSX.Element => {
             <Link to="/" className="2xl:w-[250px]">
               <img src={logo} className="w-[100px]" alt="Logo" />
             </Link>
-            <button
-              onClick={() => {
-                asideBarRef?.current?.classList.remove('translate-x-0')
-                asideBarRef?.current?.classList.add('translate-x-full')
-              }}
-            >
+            <button onClick={closeSidebar}>
               <img src={close} alt="Close" className="h-8 w-8" />
             </button>
           </div>
 
           {/* links */}
-          <ul className="gap-8 text-neutral-10 flex flex-col">
-            {NAV_LINKS.map((link, index) => (
+          <ul className="gap-8 text-neutral-10 flex flex-col pb-24 min-h-screen justify-center items-center">
+          {NAV_LINKS.map((link, index) => (
               <li key={index} className="text-[18px]">
-                <Link to={link.url}>{link.label}</Link>
+                <a href={link.url} onClick={closeSidebar}>
+                  {link.label}
+                </a>
               </li>
             ))}
           </ul>
-          {/* cta buttons */}
-          <div className="flex gap-4">
-            <button className="w-full">
-              <SecondaryButton className="w-full">Login</SecondaryButton>
-            </button>
-            <Link to="#" className="w-full">
-              <PrimaryButton className="w-full">Sign Up</PrimaryButton>
-            </Link>
-          </div>
+          {/* cta buttons for small screens */}
+        
         </nav>
       </aside>
     </>
-  )
-}
+  );
+};
 
 Navbar.propTypes = {
-  onClick: PropTypes.func.isRequired,
-}
+  // onClick: PropTypes.func,
+};
 
-export default Navbar
+export default Navbar;

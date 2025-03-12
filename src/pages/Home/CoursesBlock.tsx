@@ -3,11 +3,17 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllCourses } from '../../api/courses';
 import type { ICourse } from '../../types/course.types';
 import { FaChartLine, FaLaptopCode, FaDatabase, FaPaintBrush, FaCode, FaVideo } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SecondaryButton from '../../components/buttons/SecondaryButton';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
+import { RootState } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveTab, setIsModalOpen } from '../../store/slices/modalSlices';
 
 const CoursesBlock = () => {
+      const dispatch = useDispatch()
+      const navigate = useNavigate()
+    
     const {
         data: courses = [],
         isLoading,
@@ -16,6 +22,21 @@ const CoursesBlock = () => {
         queryKey: ['courses'],
         queryFn: getAllCourses,
     });
+
+    const { isAuthenticated, user } = useSelector(
+        (state: RootState) => state.userSlice
+      );
+
+      const handleExploreClick = (e:any, slug:any) => {
+        if (!isAuthenticated) {
+            e.preventDefault(); // Prevent default link behavior
+            dispatch(setActiveTab('login')); // Set the modal tab to "login"
+            dispatch(setIsModalOpen(true)); // Open the modal
+        } else {
+            navigate(`/course/${slug}`); // Redirect to the course page
+        }
+    };
+    
 
     useEffect(() => {
         if (courses.length > 0) {
@@ -75,7 +96,7 @@ const CoursesBlock = () => {
     if (isError) return <p className="text-center text-red-500 dark:text-red-400">Error fetching courses. Please try again later.</p>;
 
     return (
-        <div className="p-6 bg-gray-100 dark:bg-gray-900 min-h-screen">
+        <div className="p-6 bg-gray-100 dark:bg-gray-900 min-h-screen" id='courses'>
             {courses.length === 0 ? (
                 <p className="text-center text-gray-600 dark:text-gray-300">No courses found.</p>
             ) : (
@@ -116,11 +137,11 @@ const CoursesBlock = () => {
                                    
                                 </div>
 
-                                 <Link to={`/course/${course.slug}`} className="w-full">
+                                 <div onClick={(e)=>handleExploreClick(e,course.slug)} className="w-full">
                                             <SecondaryButton className="w-full">
                                               Let&apos;s Explore It
                                             </SecondaryButton>
-                                          </Link>
+                                          </div>
 
 
                                

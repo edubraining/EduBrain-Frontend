@@ -13,15 +13,6 @@ interface RootLayoutProps {
 const RootLayout = ({ children }: RootLayoutProps): JSX.Element => {
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    handleGetUser()
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  })
 
   const { isError, isLoading, data } = useQuery({
     queryKey: ['user'],
