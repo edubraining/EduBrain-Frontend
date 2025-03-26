@@ -26,7 +26,7 @@ const Certification: React.FC = () => {
       </div>
       <div className="flex gap-6 justify-center py-10 max-lg:flex-col">
         <div className="flex justify-center ">
-          <div className=" bg-neutral-70 h-[400px] w-[644px] max-xl:w-[550px] max-sm:w-[320px] max-sm:h-[240px] flex justify-center rounded-xl"></div>
+          <img src={'/images/Certificate.png'}  className=" bg-neutral-70 h-[400px] w-[644px] max-xl:w-[550px] max-sm:w-[320px] max-sm:h-[240px] flex justify-center rounded-xl"></img>
         </div>
         <div className="flex justify-center">
           <div className="flex flex-col w-[600px] max-xl:w-[500px] max-sm:w-[320px]">

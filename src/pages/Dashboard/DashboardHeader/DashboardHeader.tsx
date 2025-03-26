@@ -190,7 +190,11 @@ const DashboardHeader = (props: Props): JSX.Element => {
             {isOpen && (
               <div className="absolute right-0 mt-2 w-40 z-10 origin-top-right bg-neutral-100 rounded-lg shadow-lg border border-primary-60 p-2">
                 <div className="py-1">
-                  <p className="text-neutral-10 block px-2 py-2 text-sm hover:bg-primary-60 transition duration-300 cursor-pointer rounded-lg">
+                  <p 
+
+                  onClick={()=>navigate('/')}
+                  
+                  className="text-neutral-10 block px-2 py-2 text-sm hover:bg-primary-60 transition duration-300 cursor-pointer rounded-lg">
                     Home
                   </p>
                   <p className="text-neutral-10 block px-2 py-2 text-sm hover:bg-primary-60 transition duration-300 cursor-pointer rounded-lg">

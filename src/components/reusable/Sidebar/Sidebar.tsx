@@ -6,7 +6,6 @@ import { IoLogoGameControllerB } from 'react-icons/io'
 import { IoCheckmarkDoneCircle } from 'react-icons/io5'
 import { GrCertificate } from 'react-icons/gr'
 import { TbLogout2 } from 'react-icons/tb'
-import logo from '../../../assets/logo.png'
 import Togglebtn from './Togglebtn'
 import { handleLogout } from '../../../api/user'
 import toast from 'react-hot-toast'
@@ -64,7 +63,7 @@ const Sidebar = (): JSX.Element => {
     <div className=" dark:bg-background bg-neutral-5 w-[290px] p-5 h-screen sticky top-0 hidden lg:block">
       {/* Logo */}
       <Link to={'/'} className="flex justify-center">
-        <img className="w-16 mb-16" src={logo} alt="" />
+        <img className="w-36 mb-6 h-24" src={'/images/Edubrainlogo.jpg'} alt="" />
       </Link>
 
       {/* Navlinks */}

@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../../assets/icons/logo.svg';
 import menu from '../../assets/icons/menu.svg';
 import close from '../../assets/icons/close.svg';
 import NAV_LINKS from './navlinks';
@@ -17,6 +16,20 @@ const Navbar = ({ onClick }: { onClick?: () => void }): JSX.Element => {
     (state: RootState) => state.userSlice
   );
 
+  const handleNavLinkClick = (url: string) => {
+    // Redirect to the home page first
+    navigate('/');
+
+    // After a short delay, scroll to the corresponding section
+    setTimeout(() => {
+      const sectionId = url.split('#')[1]; // Extract the section ID (e.g., 'about')
+      const sectionElement = document.getElementById(sectionId);
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100); // Adjust the delay if needed
+  };
+
   const closeSidebar = () => {
     asideBarRef?.current?.classList.remove('translate-x-0');
     asideBarRef?.current?.classList.add('translate-x-full');
@@ -28,13 +41,21 @@ const Navbar = ({ onClick }: { onClick?: () => void }): JSX.Element => {
         <nav className="flex justify-between items-center padding-x m-auto ">
           {/* logo */}
           <Link to="/" className="2xl:w-[250px]">
-            <img src={logo} className="w-[100px]" alt="Logo" />
+            <img src={'/images/Edubrainlogo.jpg'} className="w-[100px] h-[100px] rounded-md" alt="Logo" />
           </Link>
           {/* links */}
           <ul className="gap-8 text-neutral-10 hidden xl:flex pb-24">
             {NAV_LINKS.map((link, index) => (
               <li key={index} className="text-[18px]">
-                <a href={link.url}>{link.label}</a>
+                <a 
+                
+                href={link.url}
+                onClick={(e) => {
+                  e.preventDefault(); 
+                  handleNavLinkClick(link.url); 
+                }}
+                
+                >{link.label}</a>
               </li>
             ))}
           </ul>
@@ -76,7 +97,7 @@ const Navbar = ({ onClick }: { onClick?: () => void }): JSX.Element => {
           {/* logo */}
           <div className="flex justify-between items-center w-full gap-4">
             <Link to="/" className="2xl:w-[250px]">
-              <img src={logo} className="w-[100px]" alt="Logo" />
+              <img src={'/images/Edubrainlogo.jpg'} className="w-[100px]" alt="Logo" />
             </Link>
             <button onClick={closeSidebar}>
               <img src={close} alt="Close" className="h-8 w-8" />
@@ -87,7 +108,14 @@ const Navbar = ({ onClick }: { onClick?: () => void }): JSX.Element => {
           <ul className="gap-8 text-neutral-10 flex flex-col pb-24 min-h-screen justify-center items-center">
           {NAV_LINKS.map((link, index) => (
               <li key={index} className="text-[18px]">
-                <a href={link.url} onClick={closeSidebar}>
+                <a href={link.url}
+                onClick={(e) => {
+                  e.preventDefault(); 
+                  handleNavLinkClick(link.url); 
+                  closeSidebar(); 
+                }}
+                
+                >
                   {link.label}
                 </a>
               </li>

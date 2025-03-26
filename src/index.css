@@ -29,7 +29,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #231919; /* Hover state */
+  background: #716565; /* Hover state */
 }
 
 /* Optional: Reset any horizontal scrollbar styling */
@@ -44,6 +44,17 @@
   -ms-overflow-style: none; 
   scrollbar-width: none; 
 } */
+
+
+
+
+
+
+
+
+
+
+
 
 h1,
 h2,

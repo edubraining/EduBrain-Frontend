@@ -6,6 +6,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { type ICourse } from '../../../types/course.types'
 import { getAllCourses } from '../../../api/courses'
+import { handleGetUser } from '../../../api/user'
 
 interface PackageProps {
   title: string
@@ -27,6 +28,20 @@ const Payment: React.FC<PaymentProps> = ({ package1, package2 }) => {
     queryKey: ['courses'],
     queryFn: getAllCourses,
   })
+   const { data: userData } = useQuery({
+      queryKey: ['user'],
+      queryFn: handleGetUser,
+      retry: 0,
+    })
+  const user: any = userData
+
+  const useremail: string = user?.email || ''
+
+  const handleEnroll = (): void => {
+    useremail
+      ? (window.location.href = `https://pages.razorpay.com/pl_PCndOh475OhoA1/view?product=$&email=${useremail}`)
+      : (window.location.href = `https://pages.razorpay.com/pl_PCndOh475OhoA1/view?product=$`)
+  }
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -78,6 +93,8 @@ const Payment: React.FC<PaymentProps> = ({ package1, package2 }) => {
               </div>
             ))}
             <button
+            onClick={handleEnroll}
+
               className={`bg-[#246BFD]  font-semibold text-white px-10 py-4 rounded-xl`}
             >
               {package1.buttonLabel}
@@ -103,6 +120,10 @@ const Payment: React.FC<PaymentProps> = ({ package1, package2 }) => {
             </div>
           ))}
           <button
+
+          onClick={handleEnroll}
+
+
             className={`bg-[#FF9300] font-semibold text-white px-6 py-4 rounded-xl`}
           >
             {package2.buttonLabel}

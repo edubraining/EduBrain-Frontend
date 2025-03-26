@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import play from '../../../assets/images/arrow-right.svg'
+import { useLocation } from 'react-router-dom'
 
 interface Section {
   _id: string
@@ -23,7 +24,7 @@ interface CurriculumProps {
 const Playlist: React.FC<{ lecture: Lecture }> = ({ lecture }) => {
   return (
     <>
-      <div className="flex justify-between gap-1 items-center">
+      <div className="flex justify-between gap-1 items-center overflow-hidden">
         <div className="flex gap-1 cursor-pointer items-center">
           <img src={play} alt="play" className="w-4 h-4" />
           <span className="text-white text-sm max-sm:text-xs truncate">
@@ -70,6 +71,9 @@ const Curriculum: React.FC<CurriculumProps> = ({ sections, courseTitle }) => {
     scrollIntoViewIfNeeded(refs.current[index])
   }
 
+  const location = useLocation();
+
+
   const scrollIntoViewIfNeeded = (
     ref: React.RefObject<HTMLDivElement>
   ): void => {
@@ -80,7 +84,14 @@ const Curriculum: React.FC<CurriculumProps> = ({ sections, courseTitle }) => {
   }
 
   return (
-    <div className="py-16 px-4">
+    <div 
+
+
+    
+
+   
+    
+    className="py-16 px-4  course-content-container"  >
       <div className="flex justify-center py-16" id="curriculumSection">
         <div className="flex flex-col gap-4 text-center">
           <span className="font-normal text-[#246BFD] text-2xl">
@@ -95,7 +106,11 @@ const Curriculum: React.FC<CurriculumProps> = ({ sections, courseTitle }) => {
           </p>
         </div>
       </div>
-      <div className="flex justify-center gap-4 flex-wrap mb-10">
+      <div 
+
+    
+      
+      className="flex justify-center gap-4 flex-wrap mb-1 overflow-hidden">
         {sections.map((section, index) => (
           <button
             key={section._id}
@@ -136,7 +151,7 @@ const Curriculum: React.FC<CurriculumProps> = ({ sections, courseTitle }) => {
               </ul>
             </div>
           </div>
-          <div className="lg:w-1/2 bg-[#121721] rounded-2xl p-4 h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-[#246BFD] scrollbar-track-transparent">
+          <div className="lg:w-1/2 bg-[#121721] rounded-2xl p-4 h-[1200px] overflow-y-auto scrollbar-thin scrollbar-thumb-[#246BFD] scrollbar-track-transparent">
             {sections.map((section, index) => (
               <div key={section._id}>
                 <h4

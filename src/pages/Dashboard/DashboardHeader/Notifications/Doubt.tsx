@@ -16,6 +16,7 @@ interface Doubt {
     status: "pending" | "resolved";
     createdAt: string | Date;
     mentorResponse?: string; // Optional because not all doubts may have a mentor response
+    mentorFileUrl?:string
 }
 
 const DoubtModal = () => {
@@ -95,6 +96,8 @@ const DoubtModal = () => {
             const response = await axios.get(`${BASE_URL}/student-doubt/${user}`);
             if (response.status === 200) {
                 setDoubts(response.data);
+                console.log("Fetched doubtes", response);
+                
             } else {
                 alert("Failed to fetch doubts.");
             }
@@ -176,10 +179,10 @@ const DoubtModal = () => {
         <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-2xl relative transform transition-all duration-300 ease-in-out">
             {/* Close Button */}
             <button
-                className="absolute top-3 right-3 text-gray-600 hover:text-gray-800 focus:outline-none"
+                className="absolute top-6 right-3 text-gray-600 hover:text-gray-800 focus:outline-none"
                 onClick={() => setIsReviewOpen(false)}
             >
-                <AiOutlineCloseCircle size={28} />
+                <AiOutlineCloseCircle size={48} />
             </button>
 
             <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
@@ -213,6 +216,18 @@ const DoubtModal = () => {
                                         className="text-blue-500 hover:text-blue-700 hover:underline"
                                     >
                                         <SecondaryButton>View File </SecondaryButton>
+                                    </a>
+                                </div>
+                            )}
+                            {doubt.mentorFileUrl && (
+                                <div className="mt-2">
+                                    <a
+                                        href={doubt.mentorFileUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-500 hover:text-blue-700 hover:underline"
+                                    >
+                                        <SecondaryButton>View Mentor File </SecondaryButton>
                                     </a>
                                 </div>
                             )}

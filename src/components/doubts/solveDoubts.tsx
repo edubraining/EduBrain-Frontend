@@ -5,6 +5,7 @@ import axios from "axios";
 import SecondaryButton from "../buttons/SecondaryButton";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 
 interface Doubt {
     _id: string;
@@ -20,6 +21,7 @@ const SolveDoubts = () => {
     const BASE_URL = process.env.REACT_APP_SERVER_BASE_URL + "/api/v1";
     const [doubts, setDoubts] = useState<Doubt[]>([]);
     const [loading, setLoading] = useState(false);
+    const [mentorLoading, setMentorloading] = useState(false);
     const [mentorResponses, setMentorResponses] = useState<{ [key: string]: string }>({});
     const [filter, setFilter] = useState<"pending" | "resolved">("pending");
     const navigate = useNavigate();
@@ -42,17 +44,31 @@ const SolveDoubts = () => {
         }
     };
 
+    const resolved = "resolved"
+
     const handleUpdateDoubt = async (doubtId: string) => {
         const mentorResponse = mentorResponses[doubtId];
         if (!mentorResponse) {
             alert("Please enter a mentor response.");
             return;
         }
+        setMentorloading(true);
 
         try {
-            const response = await axios.put(`${BASE_URL}/update-doubt/${doubtId}`, {
-                status: "resolved",
-                mentorResponse,
+            const formData = new FormData();
+            formData.append("mentorResponse", mentorResponse);
+            formData.append("status", resolved);
+
+
+
+            if (file) {
+                formData.append("file", file);
+            }
+            const response = await axios.put(`${BASE_URL}/update-doubt/${doubtId}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+
             });
 
             if (response.status === 200) {
@@ -64,6 +80,9 @@ const SolveDoubts = () => {
         } catch (error) {
             console.error("Error updating doubt:", error);
             alert("An error occurred while updating the doubt.");
+        }
+        finally {
+            setMentorloading(false);
         }
     };
 
@@ -88,6 +107,14 @@ const SolveDoubts = () => {
         fetchDoubts();
     }, []);
 
+    const [file, setFile] = useState<File | null>(null);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setFile(e.target.files[0]);
+        }
+    };
+
     const filteredDoubts = doubts.filter(doubt => doubt.status === filter);
 
     return (
@@ -100,15 +127,15 @@ const SolveDoubts = () => {
             <div className="flex gap-4 mb-6 text-white">
                 <button
                     onClick={() => setFilter("pending")}
-                    className={`py-2 px-4 rounded-lg ${filter === "pending" }`}
+                    className={`py-2 px-4 rounded-lg ${filter === "pending"}`}
                 >
-                   {filter === "pending"? <PrimaryButton> Pending</PrimaryButton>:<SecondaryButton>Pending</SecondaryButton> }
+                    {filter === "pending" ? <PrimaryButton> Pending</PrimaryButton> : <SecondaryButton>Pending</SecondaryButton>}
                 </button>
                 <button
                     onClick={() => setFilter("resolved")}
                     className={`py-2 px-4 rounded-lg ${filter === "resolved" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"} transition`}
                 >
-                     {filter === "resolved"? <PrimaryButton> Resolved</PrimaryButton>:<SecondaryButton>Resolved</SecondaryButton> }
+                    {filter === "resolved" ? <PrimaryButton> Resolved</PrimaryButton> : <SecondaryButton>Resolved</SecondaryButton>}
                 </button>
             </div>
 
@@ -123,11 +150,10 @@ const SolveDoubts = () => {
                             <div className="flex justify-between items-center mb-4">
                                 <p className="text-lg font-semibold">Doubt - {doubt.message}</p>
                                 <span
-                                    className={`px-3 py-1 rounded-full text-sm ${
-                                        doubt.status === "pending"
-                                            ? "bg-yellow-200 text-yellow-800"
-                                            : "bg-green-200 text-green-800"
-                                    }`}
+                                    className={`px-3 py-1 rounded-full text-sm ${doubt.status === "pending"
+                                        ? "bg-yellow-200 text-yellow-800"
+                                        : "bg-green-200 text-green-800"
+                                        }`}
                                 >
                                     <SecondaryButton> {doubt.status}</SecondaryButton>
                                 </span>
@@ -164,14 +190,33 @@ const SolveDoubts = () => {
                                     rows={3}
                                     placeholder="Enter your response..."
                                 />
+
+
+
+
+                                {/* File Upload */}
+                                <label className="flex items-center gap-3 p-3 border border-dashed rounded-lg cursor-pointer hover:border-blue-500 transition">
+                                    <AiOutlineCloudUpload size={24} className="text-blue-500" />
+                                    <span className="text-gray-600">{file ? file.name : "Upload a file"}</span>
+                                    <input type="file" onChange={handleFileChange} className="hidden" accept="image/png, image/jpeg, image/jpg"
+                                    />
+                                </label>
+
+
+
                             </div>
 
                             <div className="flex gap-4">
                                 <button
+
+
+
+
+
                                     onClick={() => handleUpdateDoubt(doubt._id)}
                                     className="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
                                 >
-                                    <PrimaryButton>Mark as Resolved</PrimaryButton>
+                                    <PrimaryButton   >{mentorLoading ? "Marking..." : "Mark as Resolved"} </PrimaryButton>
                                 </button>
                                 <button
                                     onClick={() => handleDeleteDoubt(doubt._id)}
@@ -185,7 +230,7 @@ const SolveDoubts = () => {
                 </div>
             )}
 
-           
+
         </div>
     );
 };

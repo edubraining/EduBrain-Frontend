@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getAllCourses } from '../../api/courses';
-import type { ICourse } from '../../types/course.types';
-import { FaChartLine, FaLaptopCode, FaDatabase, FaPaintBrush, FaCode, FaVideo } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import SecondaryButton from '../../components/buttons/SecondaryButton';
-import PrimaryButton from '../../components/buttons/PrimaryButton';
-import { RootState } from '../../store';
+import { useEffect } from 'react';
+import { FaChartLine, FaCode, FaDatabase, FaLaptopCode, FaPaintBrush, FaVideo } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { getAllCourses } from '../../api/courses';
+import SecondaryButton from '../../components/buttons/SecondaryButton';
+import { RootState } from '../../store';
+import type { ICourse } from '../../types/course.types';
 import { setActiveTab, setIsModalOpen } from '../../store/slices/modalSlices';
 
 const CoursesBlock = () => {
@@ -29,13 +28,20 @@ const CoursesBlock = () => {
 
       const handleExploreClick = (e:any, slug:any) => {
         if (!isAuthenticated) {
-            e.preventDefault(); // Prevent default link behavior
-            dispatch(setActiveTab('login')); // Set the modal tab to "login"
-            dispatch(setIsModalOpen(true)); // Open the modal
-        } else {
-            navigate(`/course/${slug}`); // Redirect to the course page
-        }
+               e.preventDefault(); 
+               dispatch(setActiveTab('login')); 
+               dispatch(setIsModalOpen(true)); 
+           } else {
+            navigate(`/course/${slug}`); 
+           }
+      
+       
+
     };
+
+
+
+
     
 
     useEffect(() => {
@@ -44,26 +50,7 @@ const CoursesBlock = () => {
         }
     }, [courses]);
 
-    // const getCategoryIcon = (category: string) => {
-    //     switch (category) {
-    //         case 'Data Analytics':
-    //             return <FaChartLine className="text-4xl text-blue-500" />;
-    //         case 'Power BI':
-    //             return <FaChartLine className="text-4xl text-blue-500" />;
-    //         case 'Machine Learning':
-    //             return <FaDatabase className="text-4xl text-purple-500" />;
-    //         case 'Full Stack Development':
-    //             return <FaLaptopCode className="text-4xl text-green-500" />;
-    //         case 'UI/UX':
-    //             return <FaPaintBrush className="text-4xl text-pink-500" />;
-    //         case 'C++':
-    //         case 'JAVA':
-    //         case '.NET':
-    //             return <FaCode className="text-4xl text-orange-500" />;
-    //         default:
-    //             return <FaCode className="text-4xl text-gray-500" />;
-    //     }
-    // };
+   
     const getCategoryIcon = (category: string) => {
         switch (category) {
             case 'Data Analytics':

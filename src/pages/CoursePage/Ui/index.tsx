@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import Navbar from '../../../components/navbar'
@@ -18,6 +18,18 @@ interface UIDataType {
 const HomePage = (): JSX.Element => {
   const { page } = useParams<{ page: string }>()
   const navigate = useNavigate()
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Add class when component mounts
+    document.documentElement.classList.add('course-page');
+    
+    // Cleanup on unmount
+    return () => {
+      document.documentElement.classList.remove('course-page');
+    };
+  }, [location.pathname]); // Re-run if path changes
 
   const {
     data: courses,
@@ -72,9 +84,17 @@ const HomePage = (): JSX.Element => {
   }
 
   return (
-    <div className="dark bg-background">
+    <div
+    
+    
+    className="dark bg-background overflow-hidden"  >
       <Navbar />
-      <main className="mt-[64px] xl:mt-[80px]">
+      <main 
+
+
+  
+   
+      className="mt-[64px] xl:mt-[80px]">
         {page && currentCourse && (
           <UI data={transformCourseData(currentCourse)} />
         )}
