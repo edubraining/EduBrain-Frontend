@@ -118,11 +118,11 @@ const UI: React.FC<UiProps> = ({ data }) => {
         package1={{
           title: 'Self-Paced',
           description:
-            'Unlock foundational knowledge with our Basic Plan. Ideal for self-paced learners',
-          oldPrice: 100,
-          price: 20,
+            'Unlock foundational knowledge with our mentor supports through chat',
+          oldPrice: 1999,
+          price: 1299,
           features: [
-            'Access to all course materials',
+            'Get mentor support through Chat 24 X 7',
             'Self-paced learning',
             'Certificate of completion',
           ],
@@ -131,11 +131,11 @@ const UI: React.FC<UiProps> = ({ data }) => {
         package2={{
           title: 'Mentor Support',
           description:
-            'Unlock foundational knowledge with our Basic Plan. Ideal for self-paced learners',
+            'Unlock foundational knowledge with our Mentor Support through Screen Sharing.',
           oldPrice: 1999,
           price: 1299,
           features: [
-            'Dedicated mentor support',
+            'Dedicated mentor support by Screen Sharing',
             'Interactive live sessions',
             'Engaging assignments and projects',
           ],
