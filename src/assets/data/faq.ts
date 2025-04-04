@@ -54,7 +54,7 @@ const FAQ = {
         ' In case the admins feel the reason for refund is genuine and student can not proceed ahead with the course, we have an option to refund 50% of enrollment fee to the student but applicable till 7 days of enrollment.(The 50% deduction is for the taxes, operational and payment gateway fees.)',
     },
     {
-      question: 'Exchange Plociy.',
+      question: 'Exchange Policy.',
       answer:
         ' Exchange is the action or process of Exchanging of the services provided by the Companyfor any such other services provided by the Company. User can request for an Exchange of Course availed by the User on the platform with another course available on the platform after placing a request for the Course but before accessing and availing the course. An intimation shall be provided by the Company to the User seeking either "Exchange” and the User shall receive a confirmation regarding the replacement',
     },
